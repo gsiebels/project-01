@@ -11,6 +11,12 @@ body {
   background-color:rgb(46, 46, 46);
 }
 
+h1 {
+  align-items: flex-start;
+  justify-items: flex-start;
+
+}
+
 .grid {
   display: flex;
   flex-grow: 1;
