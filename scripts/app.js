@@ -3,95 +3,132 @@ document.addEventListener('DOMContentLoaded', () => {
   // ************> Board Setup <*************
 
   const width = 20 
-  const heigth = 20
   const grid = document.querySelector('.grid')
   const cells = []
-
-  const snakesHead = 186
-  const snakesTale = 185
-  const snakesBody = 'body'
-  const randomFood = Math.floor(Math.random() * width ** 2)
-  let snake = [snakesHead,snakesTale]
+  let direction = 'right'
+  
+  const snake = [185,184,183]
+  // const randomFood = Math.floor(Math.random() * width ** 2)
 
   // =======> This creates the grid and the cells inside it <======
 
   for (let i = 0; i < width ** 2; i++) {
     const cell = document.createElement('DIV')
-
-
-    if ( i === randomFood ) cell.classList.add('food')
-
     grid.appendChild(cell)
     cells.push(cell)
   }
 
 
-  //====> This function is the makes the snake get longer when eating the food!
+  //====> This function makes the snake show up on the grid!
 
-  function eating() {
-    if (snakesHead === randomFood)
-      return snake.push(snakesBody + snake.lenght + 2)
+  function displaySnake() {
+    snake.forEach(index => cells[index].classList.add('snake'))
   }
+  displaySnake()
   
-
-  // const snakesBody = snakes + snakes.lengteh + 2
-  console.log(snake)
-  
-  
-  // if (snake[snakesHead] === randomFood ){
-  //   return snake.push(snakesBody + snake.length - 2)
-  // }
-  
-
-  
-  
+  function deleteSnake() {
+    snake.forEach(index => cells[index].classList.remove('snake'))
+  }
 
 
+  // ==========> snake movement <==============
 
-  //============> This makes the the Snake and Food to show up on the grid.
+  function moveSnake() {
+    console.log(snake)
+    if (snake[0] % width === 0 && direction === 'left' ||
+    snake[0] % width === width - 1 && direction === 'right' ||
+    snake[0] - width < 0 && direction === 'up' ||
+    snake[0] >= width * (width - 1) && direction === 'down') {
+      // return
+    }
 
-  cells[randomFood].classList.add('food')
-  // cells[snakesHead].classList.add('head')
-  // cells[snakesTale].classList.add('tale')
-  // cells[snake].classList.add('head', 'tale')
-  snake.forEach(i => {
-    cells[i].classList.add('head','tale')
-  })
-  
+    if (cells[snake[0]]. classList.contains('food')) {
+      cells[snake[0]].classList.remove('food')
+      snake.unshift(snake[0])
+    }  
+  }
+
+  function moveSnakeDown() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] + width)
+    displaySnake()
+  }
+
+  function moveSnakeUp() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] - width)
+    displaySnake()
+  }
+
+  function moveSnakeLeft() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] - 1)
+    displaySnake()
+  }
+
+  function moveSnakeRight() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] + 1)
+    displaySnake()
+  }
+  //========================================================
 
 
 
 
-  // ==========> This is the controller comand for the snake.==============
+
+  // *******************************************************
+  // ******************** EVENT LISTENER *******************
+  // *******************************************************
 
   document.addEventListener('keydown', (e) => {
-
-    snake.forEach(i => cells[i].classList.remove('head','tale'))
-   
-    // const x = snake % width
-    // const y = Math.floor(snake / width)
-
     switch (e.keyCode) {
-      case 37:  snake = snake.map(i => i -= 1)
+      case 39: moveSnakeRight()
         break
-      case 38:  snake = snake.map(i => i -= width)
+      case 37: moveSnakeLeft()
         break
-      case 39:  snake = snake.map(i => i += 1)
+      case 38: moveSnakeUp()
         break
-      case 40:  snake = snake.map(i => i += width)
+      case 40: moveSnakeDown()
         break
-    }  
-    console.log(snake)
+    }
+  })
+  
+
+
+  // cells[randomFood].classList.add('food')
+  // snake.forEach(i => {
+  //   cells[i].classList.add('snake','tale')
+  // })
+
+  //   snake.forEach(i => cells[i].classList.remove('head','tale'))
+   
+
+  //   switch (e.keyCode) {
+  //     case 37:  snake = snake.map(i => i -= 1)
+  //       break
+  //     case 38:  snake = snake.map(i => i -= width)
+  //       break
+  //     case 39:  snake = snake.map(i => i += 1)
+  //       break
+  //     case 40:  snake = snake.map(i => i += width)
+  //       break
+  //   }  
+  //   console.log(snake)
     
     
-    snake.forEach(i => cells[i].classList.add('head','tale'))
+  //   snake.forEach(i => cells[i].classList.add('head','tale'))
     
 
-  })
+  // })
 
   
 
-  eating()
+ 
 
  
   
