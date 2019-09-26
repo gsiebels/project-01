@@ -1,12 +1,20 @@
 
 // ************> Board Setup <*************
 
+
+
+
+
+
+
 function initGame(){
+
 
   const width = 20 
   const grid = document.querySelector('.grid')
   const cells = []
-  let snake = [185,184,183]
+  const snake = [185,184,183]
+  let direction
   const walls = [0,1,2,3,4,5,6,7,8,9,
     10,11,12,13,14,15,16,17,18,19,
     20,39,40,59,60,79,80,99,100,119,
@@ -16,10 +24,14 @@ function initGame(){
     384,385,386,387,388,389,390,391,392,393,
     394,395,396,397,398,399,
     92,94,95,115,155,244,264,304,306,307]
-  let snakeSpeed = 400
+    
+  let snakeSpeed = 300
+  let score = 0
   let timer 
   const scoreDisplay = document.querySelector('.score')
-  let score = 0
+  const restartButton = document.getElementById('resetButton')
+  
+  let hasLoaded = false
   
 
   //======================================================================
@@ -28,35 +40,40 @@ function initGame(){
   // =======> This creates the grid and the cells inside it <======
 
   function setupGame() {
-
+    
+    grid.innerHTML = ''
     for (let i = 0; i < width ** 2; i++) {
       const cell = document.createElement('DIV')
       grid.appendChild(cell)
       cells.push(cell)
     }
     walls.forEach(index => cells[index].classList.add('wall')) 
+    hasLoaded = true
   }
 
+  if (hasLoaded === false) setupGame()
+
   function resButton(){
-    const restartButton = document.createElement('BUTTON')
-    restartButton.innerHTML = 'Play Again!'
-    document.body.appendChild(restartButton)  
     restartButton.addEventListener('click', () => {
-      
-      snake = [185,184,183]
+      grid.style.display = 'flex'
+      restartButton.style.display = 'none'
       console.log('hello')
-        
+      score = 0
+      scoreDisplay.innerText = score
       initGame()
-      restartButton.classList.remove('BUTTON')  
+       
     })
-    displaySnake()
+    
   }
-  setupGame()
+  
 
 
   //====> Makes the snake appear and desppiear for the movement ==========
   function displaySnake() {
+    
     snake.forEach(index => cells[index].classList.add('snake'))
+   
+    
   }
   displaySnake()
     
@@ -69,7 +86,7 @@ function initGame(){
 
   function food() {
     let randomFood = Math.floor(Math.random() * cells.length)
-    while (cells[randomFood].classList.contains('snake' && 'wall')) {
+    while (cells[randomFood].classList.contains( snake && 'wall')) {
       randomFood = Math.floor(Math.random() * cells.length)
     }
     cells[randomFood].classList.add('food')
@@ -81,7 +98,7 @@ function initGame(){
   function snakeEats() {
     if (cells[snake[0]].classList.contains('food')) {
       cells[snake[0]].classList.remove('food')
-      snakeSpeed -= 10 
+      snakeSpeed -= 8 
       score ++
       scoreDisplay.innerText = score
       snake.unshift(snake[0])     
@@ -92,12 +109,15 @@ function initGame(){
   //==============> GAME OVER ===========================================
 
   function gameOver() {
-    grid.innerHTML = ''
-    deleteSnake()
+    
+    // grid.innerHTML = ''
+    grid.style.display = 'none'
+    // grid.classList.remove('.grid')
     console.log('Game Over')
-    // if (timer) clearInterval(timer)  
+    if (timer) clearTimeout(timer) 
+    restartButton.style.display = 'block'
     resButton()
-    clearInterval(timer)
+    deleteSnake()
     
   }   
       
@@ -113,68 +133,81 @@ function initGame(){
 
     
   // ==========> Snake automatic movement <===============================
-  // =============> UP DOWN RIGHT LEFT Movement ==========================
-  function moveSnake() {
   
-    function moveSnakeDown() {
-      deleteSnake()
-      snake.pop()
-      snake.unshift(snake[0] + width)
-      displaySnake()
-      snakeDies()
-      snakeEats()
-    }
+  function moveSnake() {
 
-    function moveSnakeUp() {
-      deleteSnake()
-      snake.pop()
-      snake.unshift(snake[0] - width)
-      displaySnake()
-      snakeDies()
-      snakeEats()
-    }
+    timer = setTimeout(moveSnake, snakeSpeed)
 
-    function moveSnakeLeft() {
-      deleteSnake()
-      snake.pop()
-      snake.unshift(snake[0] - 1)
-      displaySnake()
-      snakeDies()
-      snakeEats()
+    switch (direction){
+      case 'right': moveSnakeRight()
+        break
+      case 'left': moveSnakeLeft()
+        break
+      case 'up': moveSnakeUp()
+        break
+      case 'down': moveSnakeDown()
     }
-
-    function moveSnakeRight() {
-      deleteSnake()
-      snake.pop()
-      snake.unshift(snake[0] + 1)
-      displaySnake()
-      snakeDies()
-      snakeEats()
-    }
-      
-    document.addEventListener('keydown', (e) => {
-      let moveCall
-      switch (e.keyCode) {
-        case 39: moveCall = moveSnakeRight
-          break
-        case 37: moveCall = moveSnakeLeft
-          break
-        case 38: moveCall = moveSnakeUp
-          break
-        case 40: moveCall = moveSnakeDown
-          break          
-      }
-      if (timer) clearInterval(timer)
-      timer = setInterval(moveCall, snakeSpeed)  
-    }) 
+    snakeEats()
+    
   }
+
+  // =============> UP DOWN RIGHT LEFT Movement ==========================
+  
+  function moveSnakeDown() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] + width)
+    displaySnake()
+    snakeDies()
+    snakeEats()
+  }
+
+  function moveSnakeUp() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] - width)
+    displaySnake()
+    snakeDies()
+    snakeEats()
+  }
+
+  function moveSnakeLeft() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] - 1)
+    displaySnake()
+    snakeDies()
+    snakeEats()
+  }
+
+  function moveSnakeRight() {
+    deleteSnake()
+    snake.pop()
+    snake.unshift(snake[0] + 1)
+    displaySnake()
+    snakeDies()
+    snakeEats()
+  }
+
+
+  document.addEventListener('keydown', (e) => {
+    e.preventDefault()
+    switch (e.keyCode) {
+      case 37: if (direction !== 'right') direction = 'left'
+        break
+      case 38: if (direction !== 'down') direction = 'up'
+        break
+      case 39: if (direction !== 'left') direction = 'right'
+        break
+      case 40: if (direction !== 'up') direction = 'down'
+        break
+    }
+        
+  }) 
+
   moveSnake()
   food()
   
-  // startGame()
-
-  //========> Restart Game Button==================================
-
 }
 document.addEventListener('DOMContentLoaded', initGame)
 

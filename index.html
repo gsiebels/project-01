@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Snake Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
   <script src="scripts/app.js"></script>
   <link rel="stylesheet" href="styles/main.css">
 </head>
+
 <body>
-  <h1>Snake</h1>
-  <div class="grid"></div>
-  <div class="score">0</div>
+  <div class="logo"><img src="images/yoshi_logo_small.png" alt="logo of the yoshi game"></div>
+  <div class="board">
+    <div class="grid"></div>
+    <div class="restartScreen">
+    <p>Score:  <span class="score">0</span></p>
+    <button id="resetButton">Play Again!</button>
+  </div>
+  </div>
+ 
 </body>
+
 </html>

@@ -4,71 +4,131 @@
 
 body {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   height: 100vh;
   margin: 0;
   background-color:rgb(19, 18, 18);
+  background-image: url('../images/mario_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  height: 100vh;
 }
 
 h1 {
-  
-  display: flex;
-  font-size: 20px;
-  color: rgb(112, 240, 73);
+  font-size: 50pxpx;
+  color: rgb(255, 255, 255);
   justify-content: center;
   align-items: flex-start;
-
 }
 
 .grid {
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
-  align-items: center;
   height: 100%;
   justify-content: center;
   max-height: 600px;
   max-width: 600px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.596);
-  background-color: rgba(235, 227, 227, 0.096);  
+  background-color: rgba(0, 0, 0, 0.486);  
+}
+
+.board {
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  padding-left: 25%;
+  padding-right: 25%;
+  
 }
 
 .grid div {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   flex-grow: 1;
   height: 5%;
   width: 5%;
 }
 
 .grid div.snake {
-background-color: rgba(192, 212, 76, 0.932);
-background-size: 150px;
-background-position-x: 0;
-background-position-y: 0; 
+  /* background-color: rgba(192, 212, 76, 0.932); */
+  background-image: url('../images/moving_yoshi.gif');
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position-x: 0;
+  background-position-y: 0; 
 }
 
-
 .grid div.wall {
-  background-color: rgba(248, 248, 246, 0.932);
-  background-image: url('Brick.png')
-  background-size: 150px;
+  /* background-color: rgba(248, 248, 246, 0.932); */
+  background-image: url('../images/bricks.png');
+  background-size: 110%;
   background-position-x: 0;
   background-position-y: 0;
 } 
 
-  .score {
-    font-size: px;
-    color: rgba(192, 212, 76, 0.932);
-    background-size: 150px;
-    background-position-x: 0;
-    background-position-y: 0;
+.score {
+  font-size: px;
+  color: rgb(243, 239, 1);
+  background-size: 150px;
+  background-position-x: 0;
+  background-position-y: 0;
 } 
 
 .grid div.food {
-  background-color: red;
-  background-size: 150px;
-  background-position-y: 0;
-  background-position-x: 0;
+  /* background-color: red; */
+  background-image: url('../images/box.png');
+  background-size: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 20px 0 rgba(245, 237, 125, 0.863);
+  
 }
 
+#yoshi {
+  color: rgb(243, 239, 1);
+  font-family: 'Mansalva', cursive;
+  font-size: 70px;
+}
+
+
+/* .board > p {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5%;
+  font-size: 20px;
+} */
+
+.restartScreen {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+#resetButton {
+
+  align-items: center;
+  box-shadow: 0 0 50px 0 solid white;
+  color:rgb(58, 58, 58);
+  font-weight: bold;
+  font-size: 20px;
+  border: 4px solid rgb(58, 58, 58);
+  border-radius: 9px;
+  align-items: center;
+  display: none;
+  background-color: rgba(243, 229, 26, 0.945);
+  padding: 30px 30px;
+  font-family: 'Fira Sans', sans-serif;
+}
+p {
+  color:white;
+  border-radius: 5px;
+  margin: 0 30%;
+  background-color:rgba(0, 0, 0, 0.486);
+  display: flex;
+  justify-content: center;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 30px;
+}
