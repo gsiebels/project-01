@@ -30,7 +30,13 @@ function initGame(){
   let timer 
   const scoreDisplay = document.querySelector('.score')
   const restartButton = document.getElementById('resetButton')
-  
+
+  const boardSound = new Audio('songs/main.mp3')
+  const eatingSound = new Audio('songs/eating.wav')
+  const deadSound = new Audio('songs/dead.wav')
+  const menuSound = new Audio('songs/restart_page.mp3')
+  const buttonSound = new Audio('songs/tongue.wav')
+
   let hasLoaded = false
   
 
@@ -46,6 +52,7 @@ function initGame(){
       const cell = document.createElement('DIV')
       grid.appendChild(cell)
       cells.push(cell)
+      
     }
     walls.forEach(index => cells[index].classList.add('wall')) 
     hasLoaded = true
@@ -61,22 +68,21 @@ function initGame(){
       score = 0
       scoreDisplay.innerText = score
       initGame()
-       
+      buttonSound.play()
+      boardSound.pause()
+      menuSound.pause()
+      
     })
     
   }
   
-
-
   //====> Makes the snake appear and desppiear for the movement ==========
+
   function displaySnake() {
-    
-    snake.forEach(index => cells[index].classList.add('snake'))
-   
-    
+    snake.forEach(index => cells[index].classList.add('snake')) 
   }
+
   displaySnake()
-    
   function deleteSnake() {
     snake.forEach(index => cells[index].classList.remove('snake'))
   }
@@ -101,23 +107,27 @@ function initGame(){
       snakeSpeed -= 8 
       score ++
       scoreDisplay.innerText = score
-      snake.unshift(snake[0])     
+      snake.unshift(snake[0])  
+      eatingSound.play()   
       food()
     } 
   }
     
+
   //==============> GAME OVER ===========================================
 
   function gameOver() {
-    
     // grid.innerHTML = ''
     grid.style.display = 'none'
-    // grid.classList.remove('.grid')
     console.log('Game Over')
     if (timer) clearTimeout(timer) 
     restartButton.style.display = 'block'
     resButton()
     deleteSnake()
+    boardSound.pause()
+    menuSound.play()
+    
+    
     
   }   
       
@@ -125,9 +135,13 @@ function initGame(){
   // =============> Snake dies ==========================================
 
   function snakeDies() {
+     
     if (snake.slice(1).includes(snake[0]) ||
       cells[snake[0]].classList.contains('wall')) {
-      gameOver()    
+      
+      deadSound.play()
+      gameOver() 
+       
     }   
   }
 
@@ -150,6 +164,7 @@ function initGame(){
     snakeEats()
     
   }
+
 
   // =============> UP DOWN RIGHT LEFT Movement ==========================
   
@@ -187,8 +202,8 @@ function initGame(){
     displaySnake()
     snakeDies()
     snakeEats()
+    boardSound.play()
   }
-
 
   document.addEventListener('keydown', (e) => {
     e.preventDefault()
@@ -201,13 +216,10 @@ function initGame(){
         break
       case 40: if (direction !== 'up') direction = 'down'
         break
-    }
-        
+    }      
   }) 
-
   moveSnake()
-  food()
-  
+  food() 
 }
 document.addEventListener('DOMContentLoaded', initGame)
 
