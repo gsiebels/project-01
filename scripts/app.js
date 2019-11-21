@@ -2,11 +2,6 @@
 // ************> Board Setup <*************
 
 
-
-
-
-
-
 function initGame(){
 
 
@@ -62,12 +57,13 @@ function initGame(){
 
   function resButton(){
     restartButton.addEventListener('click', () => {
-      grid.style.display = 'flex'
-      restartButton.style.display = 'none'
-      console.log('hello')
-      score = 0
-      scoreDisplay.innerText = score
-      initGame()
+      // grid.style.display = 'flex'
+      // restartButton.style.display = 'none'
+      // console.log('hello')
+      // score = 0
+      // scoreDisplay.innerText = score
+      // initGame()
+      document.location.reload(true) // This refreshes the site... only a quick solution for the game loop bug!!
       buttonSound.play()
       boardSound.pause()
       menuSound.pause()
@@ -92,7 +88,7 @@ function initGame(){
 
   function food() {
     let randomFood = Math.floor(Math.random() * cells.length)
-    while (cells[randomFood].classList.contains( snake && 'wall')) {
+    while (cells[randomFood].classList.contains( 'snake' && 'wall')) {
       randomFood = Math.floor(Math.random() * cells.length)
     }
     cells[randomFood].classList.add('food')
@@ -104,7 +100,7 @@ function initGame(){
   function snakeEats() {
     if (cells[snake[0]].classList.contains('food')) {
       cells[snake[0]].classList.remove('food')
-      snakeSpeed -= 8 
+      snakeSpeed -= 10 
       score ++
       scoreDisplay.innerText = score
       snake.unshift(snake[0])  

@@ -17,7 +17,7 @@ body {
 }
 
 h1 {
-  font-size: 50pxpx;
+  font-size: 50px;
   color: rgb(255, 255, 255);
   justify-content: center;
   align-items: flex-start;
@@ -36,8 +36,9 @@ h1 {
 }
 
 .board {
-  height: 80%;
   display: flex;
+  /* align-items: center; */
+  height: 80%;
   justify-content: center;
   flex-direction: column-reverse;
   padding-left: 25%;
@@ -46,10 +47,13 @@ h1 {
 }
 
 .grid div {
+  
   /* border: 1px solid white; */
   flex-grow: 1;
   height: 5%;
   width: 5%;
+  margin: 0;
+  padding: 0;
 }
 
 .grid div.snake {
