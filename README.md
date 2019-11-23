@@ -83,7 +83,7 @@ function displaySnake() {
 
 ## Challenges and future improvements
 
-I would improve the music player and fix the random food spawn. I would also do a scoreboard to make it more challenging and competitive and I would also add a special item that appears for a limited time and gives you more points when you collect it.
+I would improve the music player and fix the random food spawn and Add a special item that appears for a limited time and gives you more points when you collect it and do a scoreboard to make it more challenging and competitive and add.
 
 ## Author
 
