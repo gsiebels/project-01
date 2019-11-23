@@ -5,9 +5,9 @@
 
 ![yoshi snake logo](https://raw.githubusercontent.com/gsiebels/project-01/master/Screenshot%202019-11-21%20at%2010.53.47.png)
 
-This project was one of the options that General Assembly had for the first project during a software enginerring immersive course. This project helped me to apply all what I have learned in the fist 4 weeks in to a real project. 
+This project was one of the options that General Assembly had for the first project during a software engineering immersive course. This project helped me to apply what I have learned in the first 4 weeks in to a real project.
 
-This is my snake clone game where I used common but powerfull technologies to buld.
+This is my snake clone game where I used common but powerful technologies to build.
 
 ## Technologies
 
