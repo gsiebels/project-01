@@ -23,21 +23,9 @@ h1 {
   align-items: flex-start;
 }
 
-.grid {
-  display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
-  height: 100%;
-  justify-content: center;
-  max-height: 600px;
-  max-width: 600px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.596);
-  background-color: rgba(0, 0, 0, 0.486);  
-}
-
 .board {
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   height: 80%;
   justify-content: center;
   flex-direction: column-reverse;
@@ -45,10 +33,21 @@ h1 {
   padding-right: 25%;
   
 }
+.grid {
+  margin-top: 20px;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  max-height: 600px;
+  max-width: 600px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.596);
+  background-color: rgba(0, 0, 0, 0.486);  
+}
 
 .grid div {
-  
-  /* border: 1px solid white; */
   flex-grow: 1;
   height: 5%;
   width: 5%;
@@ -57,7 +56,6 @@ h1 {
 }
 
 .grid div.snake {
-  /* background-color: rgba(192, 212, 76, 0.932); */
   background-image: url('../images/moving_yoshi.gif');
   background-size: 110%;
   background-repeat: no-repeat;
@@ -66,7 +64,6 @@ h1 {
 }
 
 .grid div.wall {
-  /* background-color: rgba(248, 248, 246, 0.932); */
   background-image: url('../images/bricks.png');
   background-size: 110%;
   background-position-x: 0;
@@ -97,42 +94,57 @@ h1 {
   font-size: 70px;
 }
 
-
-/* .board > p {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 5%;
-  font-size: 20px;
-} */
-
 .restartScreen {
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column; 
 }
 
 #resetButton {
-
+  margin-top: 50px;
   align-items: center;
   box-shadow: 0 0 50px 0 solid white;
   color:rgb(58, 58, 58);
   font-weight: bold;
   font-size: 20px;
-  border: 4px solid rgb(58, 58, 58);
+  border: 2px solid rgba(71, 71, 71, 0.87);
   border-radius: 9px;
   align-items: center;
   display: none;
-  background-color: rgba(243, 229, 26, 0.945);
-  padding: 30px 30px;
+  background-color: rgb(243, 229, 26);
+  height: 50px;
   font-family: 'Fira Sans', sans-serif;
 }
+
 p {
+  padding: 11px;
+  align-self: center;
   color:white;
   border-radius: 5px;
-  margin: 0 30%;
-  background-color:rgba(0, 0, 0, 0.486);
+  background-color:rgba(0, 0, 0, 0.726);
+  width: 170px;
   display: flex;
   justify-content: center;
   font-family: 'Fira Sans', sans-serif;
   font-size: 30px;
+}
+.score {
+  margin-left: 10px;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.774);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  padding-top: 15px;
+  padding-left: 20px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.link {
+  color: goldenrod;
 }

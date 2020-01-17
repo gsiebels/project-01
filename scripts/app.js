@@ -57,12 +57,6 @@ function initGame(){
 
   function resButton(){
     restartButton.addEventListener('click', () => {
-      // grid.style.display = 'flex'
-      // restartButton.style.display = 'none'
-      // console.log('hello')
-      // score = 0
-      // scoreDisplay.innerText = score
-      // initGame()
       document.location.reload(true) // This refreshes the site... only a quick solution for the game loop bug!!
       buttonSound.play()
       boardSound.pause()
@@ -113,7 +107,6 @@ function initGame(){
   //==============> GAME OVER ===========================================
 
   function gameOver() {
-    // grid.innerHTML = ''
     grid.style.display = 'none'
     console.log('Game Over')
     if (timer) clearTimeout(timer) 
@@ -122,9 +115,6 @@ function initGame(){
     deleteSnake()
     boardSound.pause()
     menuSound.play()
-    
-    
-    
   }   
       
 
@@ -200,6 +190,22 @@ function initGame(){
     snakeEats()
     boardSound.play()
   }
+
+
+  // ======= Touch Screens ====== 
+  document.addEventListener('touchstart', (e) => {
+    e.preventDefault()
+    switch (e.touchstart) {
+      case 37: if (direction !== 'right') direction = 'left'
+        break
+      case 38: if (direction !== 'down') direction = 'up'
+        break
+      case 39: if (direction !== 'left') direction = 'right'
+        break
+      case 40: if (direction !== 'up') direction = 'down'
+        break
+    }      
+  }) 
 
   document.addEventListener('keydown', (e) => {
     e.preventDefault()
